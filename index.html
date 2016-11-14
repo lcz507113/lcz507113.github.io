@@ -1,3 +1,72 @@
 <html>
- <a>白手</a>
+    <head>
+        <meta charset="utf-8">
+        <meta name="author" content="程龙杰">
+        <title>圆形布局-变化</title>
+        <style>
+            /*div:nth-child(1){
+                 width:100px;
+                 height: 100px;
+                 background-color: hsl(0, 100%, 50%);
+                 top: 200px;
+                 left: 200px;
+                 border-radius: 50%;
+            }*/
+        
+            
+        </style>
+    </head>
+    <body>
+        
+        
+        <script>
+            var deg = Math.PI/3
+            var initdeg = Math.PI /4
+            var offsetX = 350
+            var offsetY = 300
+
+            var R = 150
+
+            var r1 = 100
+            var r2 = 50
+
+            for(var i = 0;i <6;i++){
+                // 创建6个div元素
+                var div = document.createElement('div')
+                div.style.width = r2 + 'px'
+                div.style.height = r1 + 'px'
+
+                //  HSL颜色指定(色调,饱和度,明度),色调在色轮上的程度值时（0-360），
+                //  0或360是红色的  120是绿色的 240 是蓝色的 饱和度 0%是指的是灰色和100%的阴影
+                //  亮度 0%是黑色 100%是白色
+                
+
+                div.style.backgroundColor = 'hsl('+i*60+ ',100%,50%)'
+                div.style.position = 'absolute'
+                div.style.borderRadius = '50%' 
+                div.style.top =offsetY + R*Math.cos(initdeg + deg*i) + 'px'
+                div.style.left =offsetX + R*Math.sin(initdeg + deg*i) +'px'
+                document.body.appendChild(div)
+
+            }
+
+            var divs = document.querySelectorAll('div')
+            console.log(divs)
+            function rotate(){
+                initdeg= initdeg - 0.02
+                for(var i = 0;i <6;i++){
+                    var div = divs[i]
+
+                    div.style.top = offsetY + R * Math.cos(initdeg +deg*i) + 'px'
+                    div.style.left = offsetX + R * Math.sin(initdeg +deg*i) + 'px'
+                    div.style.transform = 'rotate('+ 180 * -(initdeg + deg *i)/Math.PI + 'deg)'
+
+                }  
+             requestAnimationFrame(rotate)
+            }
+            requestAnimationFrame(rotate)
+
+        </script>
+        
+    </body>
 </html>
